@@ -24,10 +24,15 @@ io.sockets.on('connection', function (socket) {
     var count = 0;
 
     socket.on("submit_form", function (data) {
-        
         count ++;
-        console.log(count)
-        socket.emit("server_response", count)
-       
+        console.log(count);
+        io.emit("server_response", count);
     });
+
+    socket.on("emitReset", function (data) {
+        count = 1;
+        console.log("Reset button is pressed: "+count)
+        io.emit("server_response", count);
+    });
+    
 })

@@ -11,17 +11,23 @@
 
         $(document).ready(function() {
             var socket = io.connect("http://localhost:8000");
-    
-                $('button').click(function(){
-                    var count = 0;
-                    socket.emit("submit_form", count);
+            $('#epicButton').click(function(){
+                var count = 0;
+                socket.emit("submit_form", count);
             });
-                socket.on('server_response', function(count) {
-                    document.getElementById("passedInfo").innerHTML =
-                    "The button has been pushed : "+count+" time(s)";
-                    console.log(count);
+            socket.on('server_response', function(count) {
+                document.getElementById("passedInfo").innerHTML = "The button has been pushed : "+count+" time(s)";
+                console.log(count);
             });
 
+            $('#resetButton').click(function(){
+                var count = 1;
+                socket.emit("emitReset", count);
+            });
+            // socket.on('server_response', function(count) {
+            //     document.getElementById("passedInfo").innerHTML = "The button has been pushed : "+count+" time(s)";
+            //     console.log("Reset button is pressed: "+count);
+            // });
         }); 
 
         
